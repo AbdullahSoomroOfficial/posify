@@ -1,19 +1,13 @@
 import express from "express";
-import { stockController } from "@controllers";
-import { validate } from "@middlewares";
-import {
-  createStockZodSchema,
-  updateStockZodSchema,
-} from "src/schemas/stock.schema";
+import { stockController } from "./stock.controller";
+import { validate } from "../utils/validate.util";
+import { createStockDto } from "./dto/create-stock.dto";
+import { updateStockDto } from "./dto/update-stock.dto";
 
 const stockRouter = express.Router();
 
 // POST - /api/stocks
-stockRouter.post(
-  "/",
-  validate(createStockZodSchema),
-  stockController.createStock
-);
+stockRouter.post("/", validate(createStockDto), stockController.createStock);
 
 // GET - /api/stocks
 stockRouter.get("/", stockController.getStocks);
@@ -24,7 +18,7 @@ stockRouter.get("/:id", stockController.getStockById);
 // PUT - /api/stocks/:id
 stockRouter.put(
   "/:id",
-  validate(updateStockZodSchema),
+  validate(updateStockDto),
   stockController.updateStockById
 );
 

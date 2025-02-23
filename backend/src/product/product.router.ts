@@ -1,17 +1,15 @@
 import express from "express";
-import { productController } from "@controllers";
-import { validate } from "./../middlewares/validate.middleware";
-import {
-  createProductZodSchema,
-  updateProductZodSchema,
-} from "src/schemas/product.schema";
+import { productController } from "./product.controller";
+import { validate } from "../utils/validate.util";
+import { createProductDto } from "./dto/create-product.dto";
+import { updateProductDto } from "./dto/update-prodcut.dto";
 
 const productRouter = express.Router();
 
 // POST - /api/products
 productRouter.post(
   "/",
-  validate(createProductZodSchema),
+  validate(createProductDto),
   productController.createProduct
 );
 
@@ -24,7 +22,7 @@ productRouter.get("/:id", productController.getProductById);
 // PUT - /api/products/:id
 productRouter.put(
   "/:id",
-  validate(updateProductZodSchema),
+  validate(updateProductDto),
   productController.updateProductById
 );
 

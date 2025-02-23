@@ -50,3 +50,15 @@ export class ValidationError extends CustomError {
     return formattedErrors;
   }
 }
+
+export class NotFoundError extends CustomError {
+  constructor(message: string) {
+    super(message, 404);
+  }
+}
+
+export class BadRequestError extends CustomError {
+  constructor(message: string) {
+    super(message, 400);
+  }
+}

@@ -1,9 +1,9 @@
 import { app } from "./app";
-import { connectDB } from "./databases/connect-db.database";
+import { connectDB } from "./db/connect-db";
 
-const port = process.env.PORT || 3000;
-
-app.listen(port, async () => {
+app.listen(process.env.PORT, async () => {
   await connectDB();
-  console.log(`[server]: Server is running at http://localhost:${port}`);
+  console.log(
+    `[server]: Server is running at http://localhost:${process.env.PORT}`
+  );
 });
