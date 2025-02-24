@@ -11,8 +11,34 @@ import {
   ValidationError,
 } from "./utils/error.util";
 import { errorType } from "../../shared/interfaces";
+import swaggerUi from "swagger-ui-express";
+import swaggerJsDoc from "swagger-jsdoc";
 
 const app = express();
+
+/* Swagger setup */
+const swaggerOptions = {
+  swaggerDefinition: {
+    openapi: "3.0.0",
+    info: {
+      title: "POSify API",
+      version: "1.0.0",
+      description: "API documentation for POSify",
+    },
+    servers: [
+      {
+        url: `http://localhost:${process.env.PORT}`,
+      },
+    ],
+  },
+  apis: ["./src/**/*.ts", "../backend/doc/index.ts"], // Path to the API docs
+};
+
+app.use(
+  "/api-docs",
+  swaggerUi.serve,
+  swaggerUi.setup(swaggerJsDoc(swaggerOptions))
+);
 
 app.use("/api", appRouter);
 

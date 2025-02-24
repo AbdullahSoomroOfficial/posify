@@ -3,7 +3,7 @@ import { createResponse } from "../utils/response.util";
 import { orderService } from "./order.service";
 import { CreateOrderDto } from "./dto/create-order.dto";
 import { UpdateOrderDto } from "./dto/update-order.dto";
-import { NotFoundError } from "src/utils/error.util";
+import { NotFoundError } from "../utils/error.util";
 
 export const orderController = {
   createOrder: async (

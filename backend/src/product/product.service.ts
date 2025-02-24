@@ -3,7 +3,7 @@ import { Product as IProduct } from "../../../shared/interfaces";
 import { CreateProductDto } from "./dto/create-product.dto";
 import { UpdateProductDto } from "./dto/update-prodcut.dto";
 import { stockService } from "../stock/stock.service";
-import { orderService } from "src/order/order.service";
+import { orderService } from "../order/order.service";
 
 export const productService = {
   createProduct: async (data: CreateProductDto): Promise<IProduct> => {

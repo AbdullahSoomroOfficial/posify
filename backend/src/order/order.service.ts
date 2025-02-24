@@ -3,7 +3,7 @@ import { Order as IOrder } from "../../../shared/interfaces";
 import { CreateOrderDto } from "./dto/create-order.dto";
 import { UpdateOrderDto } from "./dto/update-order.dto";
 import { stockService } from "../stock/stock.service";
-import { BadRequestError, NotFoundError } from "src/utils/error.util";
+import { BadRequestError, NotFoundError } from "../utils/error.util";
 import { Product as IProduct } from "../../../shared/interfaces";
 
 export const orderService = {

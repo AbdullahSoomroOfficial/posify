@@ -1,6 +1,7 @@
 import dotenv from "dotenv";
 import path from "path";
 import { z } from "zod";
+import chalk from "chalk";
 
 const envSchema = z.object({
   NODE_ENV: z.enum(["production", "development"], {
@@ -29,7 +30,12 @@ const loadEnvVariables = () => {
   const parsedEnv = envSchema.safeParse(process.env);
   if (parsedEnv.success) {
     console.log(
-      `Environment variables loaded from .env.${process.env.NODE_ENV}`
+      "=============================================================="
+    );
+    console.log(
+      `[server] Environment variables loaded from ${chalk.blue(
+        `.env.${process.env.NODE_ENV}`
+      )}`
     );
     console.table(parsedEnv.data);
   } else {

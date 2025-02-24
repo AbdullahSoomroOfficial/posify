@@ -1,8 +1,4 @@
 import { z } from "zod";
-
-export const createProductDto = z.object({
-  name: z.string(),
-  price: z.number(),
-});
+import { createProductDto } from "../../../../shared/interfaces";
 
 export type CreateProductDto = z.infer<typeof createProductDto>;
