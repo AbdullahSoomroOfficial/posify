@@ -1,3 +1,4 @@
+import "./config/load-env-variables";
 import { app } from "./app";
 import { connectDB } from "./db/connect-db";
 

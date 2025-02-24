@@ -1,9 +1,9 @@
 import { Request, Response, NextFunction } from "express-serve-static-core";
-import { createResponse } from "src/utils/response.util";
+import { createResponse } from "../utils/response.util";
 import { productService } from "./product.service";
 import { CreateProductDto } from "./dto/create-product.dto";
 import { UpdateProductDto } from "./dto/update-prodcut.dto";
-import { NotFoundError } from "src/utils/error.util";
+import { NotFoundError } from "../utils/error.util";
 
 export const productController = {
   createProduct: async (
@@ -31,12 +31,26 @@ export const productController = {
     }
   },
 
-  getProducts: async (_: Request, response: Response, next: NextFunction) => {
+  getProducts: async (
+    request: Request,
+    response: Response,
+    next: NextFunction
+  ) => {
     try {
-      const products = await productService.getProducts();
+      const query = request.query;
+      const products = await productService.getProducts(query);
       response
         .status(200)
-        .json(createResponse(true, products, null, null, null, null));
+        .json(
+          createResponse(
+            true,
+            products,
+            "Product(s) fetched successfully",
+            null,
+            null,
+            null
+          )
+        );
     } catch (error) {
       next(error);
     }
@@ -50,13 +64,21 @@ export const productController = {
     try {
       const { id } = request.params;
       const product = await productService.getProductById(id);
-      if (product) {
-        response
-          .status(200)
-          .json(createResponse(true, product, null, null, null, null));
-      } else {
+      if (!product) {
         throw new NotFoundError("Product not found");
       }
+      response
+        .status(200)
+        .json(
+          createResponse(
+            true,
+            product,
+            "Product fetched successfully",
+            null,
+            null,
+            null
+          )
+        );
     } catch (error) {
       next(error);
     }
@@ -71,13 +93,21 @@ export const productController = {
       const { id } = request.params;
       const data = request.body as UpdateProductDto;
       const updatedProduct = await productService.updateProductById(id, data);
-      if (updatedProduct) {
-        response
-          .status(200)
-          .json(createResponse(true, updatedProduct, null, null, null, null));
-      } else {
+      if (!updatedProduct) {
         throw new NotFoundError("Product not found");
       }
+      response
+        .status(200)
+        .json(
+          createResponse(
+            true,
+            updatedProduct,
+            "Product updated successfully",
+            null,
+            null,
+            null
+          )
+        );
     } catch (error) {
       next(error);
     }
@@ -91,13 +121,21 @@ export const productController = {
     try {
       const { id } = request.params;
       const deletedProduct = await productService.deleteProductById(id);
-      if (deletedProduct) {
-        response
-          .status(200)
-          .json(createResponse(true, deletedProduct, null, null, null, null));
-      } else {
+      if (!deletedProduct) {
         throw new NotFoundError("Product not found");
       }
+      response
+        .status(200)
+        .json(
+          createResponse(
+            true,
+            deletedProduct,
+            "Product deleted successfully",
+            null,
+            null,
+            null
+          )
+        );
     } catch (error) {
       next(error);
     }

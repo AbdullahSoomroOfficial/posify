@@ -17,6 +17,21 @@ export const stockService = {
     return await Stock.findById(id);
   },
 
+  updateStocksQuantityByProductId: async (
+    updates: {
+      productId: string /* Filter by productId */;
+      quantity: number /* Update quantity field */;
+    }[]
+  ): Promise<any> => {
+    const bulkOp = updates.map(({ productId, quantity }) => ({
+      updateOne: {
+        filter: { productId },
+        update: { $inc: { quantity } },
+      },
+    }));
+    return await Stock.bulkWrite(bulkOp);
+  },
+
   updateStockById: async (
     id: string,
     data: UpdateStockDto
@@ -26,5 +41,9 @@ export const stockService = {
 
   deleteStockById: async (id: string): Promise<IStock | null> => {
     return await Stock.findByIdAndDelete(id);
+  },
+
+  deleteStockByProductId: async (productId: string): Promise<IStock | null> => {
+    return await Stock.findOneAndDelete({ productId });
   },
 };

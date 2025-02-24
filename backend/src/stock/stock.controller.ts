@@ -4,7 +4,7 @@ import { stockService } from "./stock.service";
 import { productService } from "../product/product.service";
 import { CreateStockDto } from "./dto/create-stock.dto";
 import { UpdateStockDto } from "./dto/update-stock.dto";
-import { NotFoundError } from "src/utils/error.util";
+import { NotFoundError } from "../utils/error.util";
 
 export const stockController = {
   createStock: async (
