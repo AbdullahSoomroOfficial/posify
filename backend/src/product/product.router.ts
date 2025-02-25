@@ -6,130 +6,27 @@ import { updateProductDto } from "../../../shared/interfaces";
 
 const productRouter = express.Router();
 
-// POST - /api/products
-/**
- * @swagger
- * /api/products:
- *   post:
- *     summary: Create a new product
- *     tags: [Products]
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             $ref: '#/components/schemas/Product'
- *     responses:
- *       201:
- *         description: Product created successfully
- *       400:
- *         description: Bad request
- */
+/* POST - /api/products */
 productRouter.post(
   "/",
   validate(createProductDto),
   productController.createProduct
 );
 
-// GET - /api/products
-/**
- * @swagger
- * /api/products:
- *   get:
- *     summary: Get all products
- *     tags: [Products]
- *     responses:
- *       200:
- *         description: List of products
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 $ref: '#/components/schemas/Product'
- */
+/* GET - /api/products */
 productRouter.get("/", productController.getProducts);
 
-// GET - /api/products/:id
-/**
- * @swagger
- * /api/products/{id}:
- *   get:
- *     summary: Get a product by ID
- *     tags: [Products]
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: string
- *         description: Product ID
- *     responses:
- *       200:
- *         description: Product details
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/Product'
- *       404:
- *         description: Product not found
- */
+/* GET - /api/products/{id} */
 productRouter.get("/:id", productController.getProductById);
 
-// PUT - /api/products/:id
-/**
- * @swagger
- * /api/products/{id}:
- *   put:
- *     summary: Update a product by ID
- *     tags: [Products]
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: string
- *         description: Product ID
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             $ref: '#/components/schemas/Product'
- *     responses:
- *       200:
- *         description: Product updated successfully
- *       400:
- *         description: Bad request
- *       404:
- *         description: Product not found
- */
+/* PUT - /api/products/{id} */
 productRouter.put(
   "/:id",
   validate(updateProductDto),
   productController.updateProductById
 );
 
-// DELETE - /api/products/:id
-/**
- * @swagger
- * /api/products/{id}:
- *   delete:
- *     summary: Delete a product by ID
- *     tags: [Products]
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: string
- *         description: Product ID
- *     responses:
- *       200:
- *         description: Product deleted successfully
- *       404:
- *         description: Product not found
- */
+/* DELETE - /api/products/{id} */
 productRouter.delete("/:id", productController.deleteProductById);
 
 export { productRouter };

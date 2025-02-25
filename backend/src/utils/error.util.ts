@@ -24,12 +24,13 @@ export class ConflictError extends CustomError {
 }
 
 export class ValidationError extends CustomError {
-  errors: ZodIssue[];
-  constructor(message: string, errors: ZodIssue[]) {
+  errors: ZodIssue[] | null;
+  constructor(message: string, errors: ZodIssue[] | null) {
     super(message, 400);
     this.errors = errors;
   }
   format() {
+    if (this.errors === null) return null;
     // Aggregate errors for each path
     const aggregatedErrors = this.errors.reduce((acc, err) => {
       const path = err.path.join("."); // Get the path for the field

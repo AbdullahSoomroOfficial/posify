@@ -12,35 +12,17 @@ import {
 } from "./utils/error.util";
 import { errorType } from "../../shared/interfaces";
 import swaggerUi from "swagger-ui-express";
-import swaggerJsDoc from "swagger-jsdoc";
+import { swaggerSpec } from "../docs";
 
 const app = express();
 
-/* Swagger setup */
-const swaggerOptions = {
-  swaggerDefinition: {
-    openapi: "3.0.0",
-    info: {
-      title: "POSify API",
-      version: "1.0.0",
-      description: "API documentation for POSify",
-    },
-    servers: [
-      {
-        url: `http://localhost:${process.env.PORT}`,
-      },
-    ],
-  },
-  apis: ["./src/**/*.ts", "../backend/doc/index.ts"], // Path to the API docs
-};
+app.use(express.json());
 
-app.use(
-  "/api-docs",
-  swaggerUi.serve,
-  swaggerUi.setup(swaggerJsDoc(swaggerOptions))
-);
-
+/* Routes */
 app.use("/api", appRouter);
+
+/* Swagger api docs */
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 /* Custom error handler */
 app.use((error: unknown, _: Request, response: Response, __: NextFunction) => {
