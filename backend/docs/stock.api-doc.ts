@@ -1,6 +1,6 @@
 export default {
   paths: {
-    "/api/stocks": {
+    "/stocks": {
       post: {
         summary: "Create a new stock",
         tags: ["Stocks"],
@@ -43,7 +43,7 @@ export default {
         },
       },
     },
-    "/api/stocks/{id}": {
+    "/stocks/{id}": {
       get: {
         summary: "Get a stock by ID",
         tags: ["Stocks"],

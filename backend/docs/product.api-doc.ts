@@ -1,6 +1,6 @@
 export default {
   paths: {
-    "/api/products": {
+    "/products": {
       post: {
         summary: "Create a new product",
         tags: ["Products"],
@@ -43,7 +43,7 @@ export default {
         },
       },
     },
-    "/api/products/{id}": {
+    "/products/{id}": {
       get: {
         summary: "Get a product by ID",
         tags: ["Products"],
