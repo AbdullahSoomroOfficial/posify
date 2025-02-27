@@ -10,7 +10,7 @@ export const stockService = {
   },
 
   getStocks: async (query: object): Promise<IStock[]> => {
-    return await Stock.find(query).populate("productId");
+    return await Stock.find(query);
   },
 
   getStockById: async (id: string): Promise<IStock | null> => {

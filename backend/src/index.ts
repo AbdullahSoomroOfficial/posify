@@ -1,6 +1,6 @@
 import "./config/load-env-variables";
-import { app } from "./app";
 import { connectDB } from "./db/connect-db";
+import { app } from "./app";
 import chalk from "chalk";
 
 app.listen(process.env.PORT, async () => {

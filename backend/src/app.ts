@@ -13,6 +13,7 @@ import {
 import { errorType } from "../../shared/interfaces";
 import swaggerUi from "swagger-ui-express";
 import { swaggerSpec } from "../docs";
+import { MongoServerError } from "mongodb";
 
 const app = express();
 
@@ -26,7 +27,34 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 /* Custom error handler */
 app.use((error: unknown, _: Request, response: Response, __: NextFunction) => {
-  if (error instanceof AuthenticationError) {
+  if (error instanceof MongoServerError && error.code === 11000) {
+    /* Duplicate key error */
+    // Extract the first duplicate field and its corresponding value.
+    const duplicateField = Object.keys((error as any).keyValue)[0];
+    const duplicateValue = (error as any).keyValue[duplicateField];
+
+    // Determine the resource name based on error details.
+    let resource = "Resource";
+    const errmsg = (error as any).errmsg || "";
+    if (errmsg.includes("posify.products")) {
+      resource = "Product";
+    }
+
+    // Build a friendly error message.
+    const message = `${resource} with ${duplicateField} "${duplicateValue}" already exists`;
+    response
+      .status(409)
+      .json(
+        createResponse(
+          false,
+          null,
+          null,
+          message,
+          "ConflictError",
+          error?.cause || null
+        )
+      );
+  } else if (error instanceof AuthenticationError) {
     /* Clear the cookie if authentication fails */
     response.clearCookie("AUTH_TOKEN");
     response

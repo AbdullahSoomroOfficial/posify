@@ -17,84 +17,9 @@ const swaggerSpec = {
   ],
   components: {
     schemas: {
-      Product: {
-        type: "object",
-        required: ["name", "price"],
-        properties: {
-          _id: {
-            type: "string",
-            description: "The auto-generated id of the product",
-          },
-          name: {
-            type: "string",
-            description: "The name of the product",
-          },
-          price: {
-            type: "number",
-            description: "The price of the product",
-          },
-        },
-        example: {
-          _id: "d5fE_asz",
-          name: "Sample Product",
-          price: 100,
-        },
-      },
-      Stock: {
-        type: "object",
-        required: ["productId", "quantity"],
-        properties: {
-          _id: {
-            type: "string",
-            description: "The auto-generated id of the stock",
-          },
-          productId: {
-            type: "string",
-            description: "The id of the product",
-          },
-          quantity: {
-            type: "number",
-            description: "The quantity of the product in stock",
-          },
-        },
-        example: {
-          _id: "d5fE_asz",
-          productId: "d5fE_asz",
-          quantity: 50,
-        },
-      },
-      Order: {
-        type: "object",
-        required: ["items", "discount"],
-        properties: {
-          items: {
-            type: "array",
-            items: {
-              type: "object",
-              properties: {
-                productId: {
-                  type: "string",
-                  description: "The id of the product",
-                },
-                quantity: {
-                  type: "number",
-                  description: "The quantity of the product",
-                },
-              },
-            },
-            example: [
-              {
-                productId: "d5fE_asz",
-                quantity: 2,
-              },
-            ],
-          },
-          discount: {
-            type: "number",
-            example: 10,
-          },
-        },
-      },
+      ...productApiDoc.schemas,
+      ...stockApiDoc.schemas,
+      ...orderApiDoc.schemas,
     },
   },
   paths: {

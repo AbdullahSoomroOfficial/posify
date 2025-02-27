@@ -3,6 +3,11 @@ import mongoose from "mongoose";
 /* Enable runValidators globally for all update methods */
 mongoose.set("runValidators", true);
 
+/* Removes __v key from all schemas */
+mongoose.plugin((schema) => {
+  schema.set("versionKey", false);
+});
+
 const connectDB = async () => {
   try {
     await mongoose.connect(process.env.DATABASE_URL);

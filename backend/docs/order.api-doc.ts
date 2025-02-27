@@ -1,15 +1,146 @@
 export default {
+  schemas: {
+    Order: {
+      type: "object",
+      properties: {
+        _id: {
+          type: "string",
+          description: "The auto-generated id of the order",
+        },
+        items: {
+          type: "array",
+          items: {
+            type: "object",
+            properties: {
+              productId: {
+                type: "string",
+                description: "The id of the product",
+              },
+              quantity: {
+                type: "number",
+                description: "The quantity of the product",
+              },
+            },
+          },
+          example: [
+            {
+              productId: "67bf27fc2cb705226a66595f",
+              quantity: 2,
+            },
+            {
+              productId: "78bf27fc2cb705226a66595f",
+              quantity: 12,
+            },
+            {
+              productId: "67bf27fc2cb705226a23595f",
+              quantity: 1,
+            },
+          ],
+        },
+        discount: {
+          type: "number",
+          description: "Minimum 0 and Maximum 100",
+          example: 10,
+        },
+      },
+    },
+    CreateOrder: {
+      type: "object",
+      required: ["items", "discount"],
+      properties: {
+        items: {
+          type: "array",
+          items: {
+            type: "object",
+            required: ["productId", "quantity"],
+            properties: {
+              productId: {
+                type: "string",
+                description: "The id of the product",
+              },
+              quantity: {
+                type: "number",
+                description: "The quantity of the product",
+              },
+            },
+          },
+          example: [
+            {
+              productId: "67bf27fc2cb705226a66595f",
+              quantity: 2,
+            },
+            {
+              productId: "78bf27fc2cb705226a66595f",
+              quantity: 12,
+            },
+            {
+              productId: "67bf27fc2cb705226a23595f",
+              quantity: 1,
+            },
+          ],
+        },
+        discount: {
+          type: "number",
+          description: "Minimum 0 and Maximum 100",
+          example: 10,
+        },
+      },
+    },
+    UpdateOrder: {
+      type: "object",
+      required: ["items", "discount"],
+      properties: {
+        items: {
+          type: "array",
+          items: {
+            type: "object",
+            required: ["productId", "quantity"],
+            properties: {
+              productId: {
+                type: "string",
+                description: "The id of the product",
+              },
+              quantity: {
+                type: "number",
+                description: "The quantity of the product",
+              },
+            },
+          },
+          example: [
+            {
+              productId: "67bf27fc2cb705226a66595f",
+              quantity: 2,
+            },
+            {
+              productId: "78bf27fc2cb705226a66595f",
+              quantity: 12,
+            },
+            {
+              productId: "67bf27fc2cb705226a23595f",
+              quantity: 1,
+            },
+          ],
+        },
+        discount: {
+          type: "number",
+          description: "Minimum 0 and Maximum 100",
+          example: 10,
+        },
+      },
+    },
+  },
   paths: {
     "/orders": {
       post: {
-        summary: "Create order",
+        summary: "Create a new order",
+        description: "Creates a new order with a unique ID.",
         tags: ["Orders"],
         requestBody: {
           required: true,
           content: {
             "application/json": {
               schema: {
-                $ref: "#/components/schemas/Order",
+                $ref: "#/components/schemas/CreateOrder",
               },
             },
           },
@@ -17,6 +148,13 @@ export default {
         responses: {
           "201": {
             description: "Order created successfully",
+            content: {
+              "application/json": {
+                schema: {
+                  $ref: "#/components/schemas/Order",
+                },
+              },
+            },
           },
           "400": {
             description: "Bad request",
@@ -25,6 +163,7 @@ export default {
       },
       get: {
         summary: "Get all orders",
+        description: "Fetches an array of orders.",
         tags: ["Orders"],
         responses: {
           "200": {
@@ -47,6 +186,7 @@ export default {
       get: {
         summary: "Get an order by ID",
         tags: ["Orders"],
+        description: "Retrieves a single order by its unique ID.",
         parameters: [
           {
             in: "path",
@@ -55,7 +195,7 @@ export default {
             schema: {
               type: "string",
             },
-            description: "Order ID",
+            description: "The unique identifier of the order",
           },
         ],
         responses: {
@@ -85,7 +225,7 @@ export default {
             schema: {
               type: "string",
             },
-            description: "Order ID",
+            description: "The unique identifier of the order",
           },
         ],
         requestBody: {
@@ -93,7 +233,7 @@ export default {
           content: {
             "application/json": {
               schema: {
-                $ref: "#/components/schemas/Order",
+                $ref: "#/components/schemas/UpdateOrder",
               },
             },
           },
@@ -113,6 +253,9 @@ export default {
       delete: {
         summary: "Delete an order by ID",
         tags: ["Orders"],
+        description:
+          "Deletes a ordeer by its unique ID. And returns deleted order in response",
+
         parameters: [
           {
             in: "path",
@@ -121,7 +264,7 @@ export default {
             schema: {
               type: "string",
             },
-            description: "Order ID",
+            description: "The unique identifier of the order",
           },
         ],
         responses: {

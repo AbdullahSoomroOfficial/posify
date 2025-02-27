@@ -49,7 +49,16 @@ export const stockController = {
       const stocks = await stockService.getStocks(query);
       response
         .status(200)
-        .json(createResponse(true, stocks, null, null, null, null));
+        .json(
+          createResponse(
+            true,
+            stocks,
+            "Stocks fetched successfully",
+            null,
+            null,
+            null
+          )
+        );
     } catch (error) {
       next(error);
     }

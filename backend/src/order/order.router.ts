@@ -15,7 +15,7 @@ orderRouter.get("/", orderController.getOrders);
 /* GET - /api/order/{id} */
 orderRouter.get("/:id", orderController.getOrderById);
 
-/* PIT - /api/order/{id} */
+/* PUT - /api/order/{id} */
 orderRouter.put(
   "/:id",
   validate(updateOrderDto),
