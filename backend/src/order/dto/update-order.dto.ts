@@ -1,4 +1,1 @@
-import { z } from "zod";
-import { updateOrderDto } from "../../../../shared/interfaces";
-
-export type UpdateOrderDto = z.infer<typeof updateOrderDto>;
+export { UpdateOrderDto } from "../../../../shared/interfaces";

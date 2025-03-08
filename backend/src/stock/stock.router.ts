@@ -2,7 +2,7 @@ import express from "express";
 import { stockController } from "./stock.controller";
 import { validate } from "../utils/validate.util";
 // import { createStockDto } from "./dto/create-stock.dto";
-import { updateStockDto } from "../../../shared/interfaces";
+import { updateStockDto } from "../../../shared/dto";
 
 const stockRouter = express.Router();
 

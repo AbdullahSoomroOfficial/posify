@@ -1,8 +1,8 @@
 import express from "express";
 import { productController } from "./product.controller";
 import { validate } from "../utils/validate.util";
-import { createProductDto } from "../../../shared/interfaces";
-import { updateProductDto } from "../../../shared/interfaces";
+import { createProductDto } from "../../../shared/dto";
+import { updateProductDto } from "../../../shared/dto";
 
 const productRouter = express.Router();
 

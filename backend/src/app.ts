@@ -20,7 +20,7 @@ const app = express();
 app.use(express.json());
 
 /* Routes */
-app.use("/api", appRouter);
+app.use("/", appRouter);
 
 /* Swagger api docs */
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));

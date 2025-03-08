@@ -11,9 +11,9 @@ mongoose.plugin((schema) => {
 const connectDB = async () => {
   try {
     await mongoose.connect(process.env.DATABASE_URL);
-    console.log(`[server]: MongoDB connected`);
+    console.log(`[server] MongoDB connected`);
   } catch (error) {
-    console.error("[server]: MongoDB connection error");
+    console.error("[server] MongoDB connection error");
     console.log(error);
     process.exit(1);
   }
