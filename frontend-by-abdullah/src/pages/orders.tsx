@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+// import { Input } from "@/components/ui/input";
 import {
   Table,
   TableBody,
@@ -16,7 +16,7 @@ import { AddOrder } from "@/components/add-order";
 import { NavLink } from "react-router";
 
 export function Orders() {
-  const [searchTerm, setSearchTerm] = useState("");
+  // const [searchTerm, setSearchTerm] = useState("");
   const [orders, setOrders] = useState<Order[]>([]);
   const { toast } = useToast();
 
@@ -41,14 +41,14 @@ export function Orders() {
         <h2 className="text-3xl font-bold">Orders</h2>
         <AddOrder getOrders={getOrders} />
       </div>
-      <div>
+      {/* <div>
         <Input
           placeholder="Search orders..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           className="max-w-sm"
         />
-      </div>
+      </div> */}
       <Table>
         <TableHeader>
           <TableRow>

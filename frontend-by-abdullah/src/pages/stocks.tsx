@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+// import { Input } from "@/components/ui/input";
 import {
   Table,
   TableBody,
@@ -15,18 +15,18 @@ import { api } from "@/api";
 import { EditStock } from "@/components/edit-stock";
 
 export function Stocks() {
-  const [searchTerm, setSearchTerm] = useState("");
+  // const [searchTerm, setSearchTerm] = useState("");
   const [stocks, setStocks] = useState<Stock[]>([]);
   const [selectedStock, setSelectedStock] = useState<Stock | null>(null);
   const { toast } = useToast();
   const [open, setOpen] = useState(false);
 
-  const filteredStocks =
-    searchTerm === ""
-      ? stocks
-      : stocks.filter((stock) =>
-          stock.productId.includes(searchTerm.toLowerCase())
-        );
+  // const filteredStocks =
+  //   searchTerm === ""
+  //     ? stocks
+  //     : stocks.filter((stock) =>
+  //         stock.productId.includes(searchTerm.toLowerCase())
+  //       );
 
   const getStocks = async () => {
     const { success, data, errorMessage } = await api.stock.getStocks();
@@ -53,14 +53,14 @@ export function Stocks() {
       <div className="flex justify-between items-center">
         <h2 className="text-3xl font-bold">Stock</h2>
       </div>
-      <div>
+      {/* <div>
         <Input
           placeholder="Search stock..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           className="max-w-sm"
         />
-      </div>
+      </div> */}
       <Table>
         <TableHeader>
           <TableRow>
@@ -70,7 +70,7 @@ export function Stocks() {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {filteredStocks.map((stock) => (
+          {stocks.map((stock) => (
             <TableRow key={stock._id}>
               <TableCell>{stock.productId}</TableCell>
               <TableCell>{stock.quantity}</TableCell>
