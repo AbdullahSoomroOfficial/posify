@@ -8,7 +8,7 @@ import {
 } from "./dto";
 import { TypeOf } from "../backend/node_modules/zod";
 
-/* Entitites */
+/* Entitites start */
 export interface Product {
   _id: string;
   name: string;
@@ -22,6 +22,7 @@ export interface Stock {
 }
 
 export interface Order {
+  _id: string;
   items: [
     {
       productId: string;
@@ -30,9 +31,16 @@ export interface Order {
       lineTotal: number;
     }
   ];
-  subtotal: number;
+  subTotal: number;
   discount: number;
   totalAmount: number;
+}
+/* Entitites end */
+
+export interface Analytics {
+  todaySales: number;
+  lastMonthSales: number;
+  lastSixMonthsSales: number;
 }
 
 export type CreateProductDto = TypeOf<typeof createProductDto>;

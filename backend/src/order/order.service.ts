@@ -5,6 +5,7 @@ import { UpdateOrderDto } from "./dto/update-order.dto";
 import { stockService } from "../stock/stock.service";
 import { BadRequestError, NotFoundError } from "../utils/error.util";
 import { Product as IProduct } from "../../../shared/interfaces";
+import { productService } from "../product/product.service";
 
 export const orderService = {
   createOrder: async (data: CreateOrderDto): Promise<IOrder> => {
@@ -18,16 +19,23 @@ export const orderService = {
       productId: { $in: productIds },
     });
 
+    const products = await productService.getProducts({
+      _id: { $in: productIds },
+    });
+
     // Validate that each order item has sufficient stock.
     const validationErrors: string[] = [];
     data.items.forEach((item) => {
       const stock = stocks.find((s) => s.productId === item.productId);
-      if (!stock) {
-        validationErrors.push(`Stock for product ${item.productId} not found`);
-      } else if (stock.quantity < item.quantity) {
-        validationErrors.push(
-          `Insufficient stock for product ${item.productId}`
-        );
+      // if (!stock) {
+      //   validationErrors.push(`Stock for product ${item.productId} not found`);
+      // } else
+      if (stock) {
+        if (stock.quantity < item.quantity) {
+          validationErrors.push(
+            `Insufficient stock for product ${item.productId}`
+          );
+        }
       }
     });
 
@@ -45,16 +53,18 @@ export const orderService = {
     // Update stock quantities.
     await stockService.updateStocksQuantityByProductId(stocksToUpdate);
 
-    const products = stocks.map(
-      (stock) => stock.productId as unknown as IProduct
-    );
+    // const products = stocks.map(
+    //   (stock) => stock.productId as unknown as IProduct
+    // );
 
     // Create and save the new order with fetched product details.
     let subTotal = 0;
     let discount = data.discount;
     let newOrderData = {
       items: data.items.map((item) => {
-        const product = products.find((p) => p._id === item.productId);
+        const product = products.find(
+          (p) => p._id.toString() === item.productId
+        );
         const lineTotal = product!.price * item.quantity; // Calculate line total
         subTotal += lineTotal; // Accumulate subTotal
         return {

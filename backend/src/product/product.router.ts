@@ -6,27 +6,27 @@ import { updateProductDto } from "../../../shared/dto";
 
 const productRouter = express.Router();
 
-/* POST - /api/products */
+/* POST - /products */
 productRouter.post(
   "/",
   validate(createProductDto),
   productController.createProduct
 );
 
-/* GET - /api/products */
+/* GET - /products */
 productRouter.get("/", productController.getProducts);
 
-/* GET - /api/products/{id} */
+/* GET - /products/{id} */
 productRouter.get("/:id", productController.getProductById);
 
-/* PUT - /api/products/{id} */
+/* PUT - /products/{id} */
 productRouter.put(
   "/:id",
   validate(updateProductDto),
   productController.updateProductById
 );
 
-/* DELETE - /api/products/{id} */
+/* DELETE - /products/{id} */
 productRouter.delete("/:id", productController.deleteProductById);
 
 export { productRouter };

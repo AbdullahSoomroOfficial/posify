@@ -1,7 +1,11 @@
 import { makeRequest } from "@/lib/utils";
-import { UpdateOrderDto } from "@interfaces";
+import { CreateOrderDto, UpdateOrderDto } from "@interfaces";
 
-export const stock = {
+export const order = {
+  createOrder: async (data: CreateOrderDto) => {
+    return await makeRequest("POST", "/orders", data);
+  },
+
   getOrders: async () => {
     return await makeRequest("GET", "/orders");
   },
@@ -12,5 +16,9 @@ export const stock = {
 
   updateOrderById: async (_id: string, data: UpdateOrderDto) => {
     return await makeRequest("PUT", `/orders/${_id}`, data);
+  },
+
+  deleteOrderById: async (_id: string) => {
+    return await makeRequest("DELETE", `/orders/${_id}`);
   },
 };

@@ -6,23 +6,23 @@ import { updateStockDto } from "../../../shared/dto";
 
 const stockRouter = express.Router();
 
-/* POST - /api/stocks */
+/* POST - /stocks */
 // stockRouter.post("/", validate(createStockDto), stockController.createStock);
 
-/* GET - /api/stocks */
+/* GET - /stocks */
 stockRouter.get("/", stockController.getStocks);
 
-/* GET - /api/stocks/{id} */
+/* GET - /stocks/{id} */
 stockRouter.get("/:id", stockController.getStockById);
 
-/* PUT - /api/stocks/{id} */
+/* PUT - /stocks/{id} */
 stockRouter.put(
   "/:id",
   validate(updateStockDto),
   stockController.updateStockById
 );
 
-/* DELETE - /api/stocks/{id} */
+/* DELETE - /stocks/{id} */
 // stockRouter.delete("/:id", stockController.deleteStockById);
 
 export { stockRouter };

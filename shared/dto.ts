@@ -28,7 +28,7 @@ export const createOrderDto = z
     items: z
       .object({
         productId: z.string(),
-        quantity: z.number().min(0),
+        quantity: z.number().min(1),
       })
       .array()
       .refine((value) => value.length > 0, {

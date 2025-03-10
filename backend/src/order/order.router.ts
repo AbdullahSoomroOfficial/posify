@@ -6,23 +6,23 @@ import { updateOrderDto } from "../../../shared/dto";
 
 const orderRouter = express.Router();
 
-/* POST - /api/order */
+/* POST - /order */
 orderRouter.post("/", validate(createOrderDto), orderController.createOrder);
 
-/* GET - /api/order */
+/* GET - /order */
 orderRouter.get("/", orderController.getOrders);
 
-/* GET - /api/order/{id} */
+/* GET - /order/{id} */
 orderRouter.get("/:id", orderController.getOrderById);
 
-/* PUT - /api/order/{id} */
+/* PUT - /order/{id} */
 orderRouter.put(
   "/:id",
   validate(updateOrderDto),
   orderController.updateOrderById
 );
 
-/* DELETE - /api/order/{id} */
+/* DELETE - /order/{id} */
 orderRouter.delete("/:id", orderController.deleteOrderById);
 
 export { orderRouter };

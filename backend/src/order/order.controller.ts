@@ -38,10 +38,10 @@ export const orderController = {
   ) => {
     try {
       const query = request.query;
-      const stocks = await orderService.getOrders(query);
+      const orders = await orderService.getOrders(query);
       response
         .status(200)
-        .json(createResponse(true, stocks, null, null, null, null));
+        .json(createResponse(true, orders, null, null, null, null));
     } catch (error) {
       next(error);
     }
