@@ -1,6 +1,7 @@
 import {
   Dialog,
   DialogContent,
+  DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
@@ -37,12 +38,16 @@ export function DeleteProduct({ productId }: { productId: string }) {
         <Button>Delete</Button>
       </DialogTrigger>
       <DialogContent>
-        <DialogTitle>Are sure you want to delete?</DialogTitle>
-        <div>
-          <Button onClick={() => setOpen(false)} className="mr-2">
+        <DialogHeader>
+          <DialogTitle>Are sure you want to delete?</DialogTitle>
+        </DialogHeader>
+        <div className="pt-4 flex gap-4">
+          <Button onClick={() => setOpen(false)} className="flex-1">
             No
           </Button>
-          <Button onClick={handleDelete}>Yes</Button>
+          <Button onClick={handleDelete} className="flex-1">
+            Yes
+          </Button>
         </div>
       </DialogContent>
     </Dialog>

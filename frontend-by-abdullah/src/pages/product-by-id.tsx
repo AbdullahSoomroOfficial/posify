@@ -1,18 +1,17 @@
 import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router";
+import { useParams } from "react-router";
 import { Product } from "@interfaces";
 import { api } from "@/api";
 import { useToast } from "@/hooks/use-toast";
 import { EditProduct } from "@/components/edit-product";
 import { DeleteProduct } from "@/components/delete-product";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { BackButton } from "@/components/back-button";
 
 export function ProductById() {
   const { productId } = useParams<{ productId: string }>();
   const [product, setProduct] = useState<Product | null>(null);
   const { toast } = useToast();
-  const navigate = useNavigate();
 
   async function fetchProduct() {
     const { success, data, errorMessage } = await api.product.getProductById(
@@ -42,10 +41,8 @@ export function ProductById() {
   }
 
   return (
-    <div className="container mx-auto p-6">
-      <Button variant="outline" onClick={() => navigate(-1)} className="mb-4">
-        Back
-      </Button>
+    <>
+      <BackButton />
       <Card className="shadow-lg">
         <CardHeader>
           <CardTitle className="text-3xl font-bold">Product Details</CardTitle>
@@ -73,6 +70,6 @@ export function ProductById() {
           </div>
         </CardContent>
       </Card>
-    </div>
+    </>
   );
 }

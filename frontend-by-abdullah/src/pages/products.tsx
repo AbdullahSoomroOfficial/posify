@@ -46,7 +46,7 @@ export function Products() {
   }, []);
 
   return (
-    <div className="p-6 space-y-6">
+    <>
       <div className="flex justify-between items-center">
         <h2 className="text-3xl font-bold">Products</h2>
         <AddProduct onProductCreated={handleProductCreated} />
@@ -81,6 +81,6 @@ export function Products() {
           ))}
         </TableBody>
       </Table>
-    </div>
+    </>
   );
 }

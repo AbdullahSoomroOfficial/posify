@@ -89,7 +89,8 @@ export function AddOrder({ getOrders }: { getOrders: () => void }) {
     (acc, item) => acc + item.price * item.quantity,
     0
   );
-  const totalAmount = subtotal - discount;
+
+  const totalAmount = subtotal * (1 - discount / 100); // discount by percentage;
 
   // Create order and submit.
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -130,99 +131,90 @@ export function AddOrder({ getOrders }: { getOrders: () => void }) {
       <DialogTrigger asChild>
         <Button>Add Order</Button>
       </DialogTrigger>
-      <DialogContent className="min-w-5xl">
+      <DialogContent className="min-w-5xl max-h-[calc(100vh-2rem)] overflow-auto">
         <DialogHeader>
           <DialogTitle>Add Order</DialogTitle>
         </DialogHeader>
         {/* Single product search at the top */}
-        <div className="mb-4">
-          <Label htmlFor="productSearch">Search Product</Label>
-          <div className="flex gap-2">
-            <Input
-              id="productSearch"
-              value={searchQuery}
-              onChange={handleSearchChange}
-              list="products-list"
-              placeholder="Enter product name"
-              required
-            />
-            <Button type="button" onClick={handleProductSelect}>
-              Add Product
-            </Button>
-          </div>
+        <div className="flex gap-4">
+          <Input
+            id="productSearch"
+            value={searchQuery}
+            onChange={handleSearchChange}
+            list="products-list"
+            placeholder="Search Product"
+            required
+          />
           <datalist id="products-list">
             {availableProducts.map((p) => (
               <option key={p._id} value={p.name} />
             ))}
           </datalist>
+          <Button type="button" onClick={handleProductSelect}>
+            Add Product
+          </Button>
         </div>
-
         <form onSubmit={handleSubmit}>
           {/* Order items list */}
-          <div className="space-y-4 py-4">
-            {items.map((item, index) => (
-              <div key={index} className="grid grid-cols-6 gap-4 items-center">
-                <div className="col-span-2">
-                  <Label>{item.productName}</Label>
+          <div className="space-y-4">
+            {items.length > 0 && (
+              <>
+                <div className="grid grid-cols-[repeat(auto-fill,minmax(170px,1fr))] gap-4 items-center">
+                  <div>Name</div>
+                  <div>Price</div>
+                  <div>Quantity</div>
+                  <div>Line Total</div>
+                  <div>Action</div>
                 </div>
-                <div className="col-span-1">
-                  <Label>Price</Label>
-                  <p>${item.price.toFixed(2)}</p>
-                </div>
-                <div className="col-span-1">
-                  <Label>Quantity</Label>
-                  <Input
-                    type="number"
-                    value={item.quantity}
-                    onChange={(e) => {
-                      const newItems = [...items];
-                      newItems[index].quantity = Number(e.target.value);
-                      setItems(newItems);
-                    }}
-                    required
-                  />
-                </div>
-                <div className="col-span-1">
-                  <Label>Line Total</Label>
-                  <p>${(item.price * item.quantity).toFixed(2)}</p>
-                </div>
-                <div className="col-span-1 flex justify-end">
-                  <Button
-                    variant="destructive"
-                    type="button"
-                    onClick={() => removeItem(index)}
+                {items.map((item, index) => (
+                  <div
+                    key={index}
+                    className="grid grid-cols-[repeat(auto-fill,minmax(170px,1fr))] gap-4 items-center"
                   >
-                    Remove
-                  </Button>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Discount input */}
-          <div className="mt-4 grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="discount" className="text-right">
-              Discount
-            </Label>
-            <div className="col-span-3">
+                    <div>{item.productName}</div>
+                    <div>${item.price.toFixed(2)}</div>
+                    <Input
+                      type="number"
+                      value={item.quantity}
+                      onChange={(e) => {
+                        const newItems = [...items];
+                        newItems[index].quantity = Number(e.target.value);
+                        setItems(newItems);
+                      }}
+                      required
+                    />
+                    <div>${(item.price * item.quantity).toFixed(2)}</div>
+                    <Button
+                      variant="destructive"
+                      type="button"
+                      onClick={() => removeItem(index)}
+                    >
+                      Remove
+                    </Button>
+                  </div>
+                ))}
+              </>
+            )}
+            {/* Discount input */}
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="discount" className="text-right font-bold">
+                Discount
+              </Label>
               <Input
                 id="discount"
                 type="number"
                 value={discount}
                 onChange={(e) => setDiscount(Number(e.target.value))}
+                className="col-span-3"
               />
             </div>
-          </div>
-
-          <div className="mt-4">
-            <p>
+            <div>
               <strong>Subtotal:</strong> ${subtotal.toFixed(2)}
-            </p>
-            <p>
+            </div>
+            <div>
               <strong>Total Amount:</strong> ${totalAmount.toFixed(2)}
-            </p>
+            </div>
           </div>
-
           <DialogFooter>
             <Button type="submit">Save Order</Button>
           </DialogFooter>

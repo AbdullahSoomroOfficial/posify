@@ -36,7 +36,7 @@ export function Orders() {
   }, []);
 
   return (
-    <div className="p-6 space-y-6">
+    <>
       <div className="flex justify-between items-center">
         <h2 className="text-3xl font-bold">Orders</h2>
         <AddOrder getOrders={getOrders} />
@@ -75,6 +75,6 @@ export function Orders() {
           ))}
         </TableBody>
       </Table>
-    </div>
+    </>
   );
 }

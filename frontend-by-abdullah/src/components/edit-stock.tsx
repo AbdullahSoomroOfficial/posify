@@ -50,11 +50,11 @@ export function EditStock({
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Edit Stock</DialogTitle>
+        </DialogHeader>
         <form onSubmit={handleSubmit}>
           <div className="grid gap-4 py-4">
-            <DialogHeader>
-              <DialogTitle>Edit Stock</DialogTitle>
-            </DialogHeader>
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="quantity" className="text-right">
                 Quantity
@@ -70,7 +70,7 @@ export function EditStock({
             </div>
           </div>
           <DialogFooter>
-            <Button type="submit">Edit</Button>
+            <Button type="submit">Save</Button>
           </DialogFooter>
         </form>
       </DialogContent>

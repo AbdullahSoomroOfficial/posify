@@ -1,16 +1,15 @@
 import { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router";
+import { useParams } from "react-router";
 import { Order } from "@interfaces";
 import { api } from "@/api";
 import { useToast } from "@/hooks/use-toast";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { BackButton } from "@/components/back-button";
 
 export function OrderById() {
   const { orderId } = useParams<{ orderId: string }>();
   const [order, setOrder] = useState<Order | null>(null);
   const { toast } = useToast();
-  const navigate = useNavigate();
 
   useEffect(() => {
     if (!orderId) return;
@@ -39,10 +38,8 @@ export function OrderById() {
   }
 
   return (
-    <div className="p-6">
-      <Button variant="outline" onClick={() => navigate(-1)} className="mb-4">
-        Back
-      </Button>
+    <>
+      <BackButton />
       <Card className="shadow-lg">
         <CardHeader>
           <CardTitle className="text-3xl font-bold">Order Details</CardTitle>
@@ -98,6 +95,6 @@ export function OrderById() {
           </div>
         </CardContent>
       </Card>
-    </div>
+    </>
   );
 }

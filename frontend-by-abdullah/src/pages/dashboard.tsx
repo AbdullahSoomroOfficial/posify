@@ -32,11 +32,11 @@ export function Dashboard() {
   console.log(analytics);
 
   return (
-    <div className="container mx-auto p-6 space-y-6">
-      <h1 className="text-4xl font-bold">Dashboard</h1>
+    <>
+      <h1 className="text-3xl font-bold">Dashboard</h1>
 
       {/* Sales Summary Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-[repeat(auto-fill,minmax(240px,1fr))] gap-6">
         <Card>
           <CardHeader>
             <CardTitle>Today's Sales</CardTitle>
@@ -68,6 +68,6 @@ export function Dashboard() {
           </CardContent>
         </Card>
       </div>
-    </div>
+    </>
   );
 }

@@ -32,7 +32,7 @@ export function Sidebar() {
           isCollapsed && "justify-center"
         )}
       >
-        {!isCollapsed && <h1 className="text-xl font-bold">IMS</h1>}
+        {!isCollapsed && <h1 className="text-xl font-bold">POSify</h1>}
         <div
           className="size-10 hover:bg-accent rounded-md flex items-center justify-center"
           onClick={() => setIsCollapsed(!isCollapsed)}

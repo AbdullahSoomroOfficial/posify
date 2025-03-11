@@ -55,11 +55,11 @@ export function EditProduct({
         <Button>Edit</Button>
       </DialogTrigger>
       <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Edit Product</DialogTitle>
+        </DialogHeader>
         <form onSubmit={handleSubmit}>
-          <DialogHeader>
-            <DialogTitle>Edit Product</DialogTitle>
-          </DialogHeader>
-          <div className="grid gap-4 py-4">
+          <div className="grid gap-4 pt-4">
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="name" className="text-right">
                 Name
@@ -85,10 +85,10 @@ export function EditProduct({
                 required
               />
             </div>
+            <DialogFooter>
+              <Button type="submit">Save</Button>
+            </DialogFooter>
           </div>
-          <DialogFooter>
-            <Button type="submit">Save</Button>
-          </DialogFooter>
         </form>
       </DialogContent>
     </Dialog>
