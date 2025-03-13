@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   LayoutDashboard,
   Package,
@@ -18,6 +18,22 @@ const navItems = [
 
 export function Sidebar() {
   const [isCollapsed, setIsCollapsed] = useState(false);
+
+  // Media query to check if viewport width is ≥48rem (768px)
+  useEffect(() => {
+    const query = "(min-width: 48rem)";
+    const media = window.matchMedia(query);
+
+    // Set sidebar to collapsed if media query matches, else open
+    setIsCollapsed(!media.matches);
+
+    const listener = (event: MediaQueryListEvent) => {
+      setIsCollapsed(!event.matches);
+    };
+
+    media.addEventListener("change", listener);
+    return () => media.removeEventListener("change", listener);
+  }, []);
 
   return (
     <div
@@ -52,7 +68,7 @@ export function Sidebar() {
             <div className="min-h-5 min-w-5">
               <item.icon className={cn("h-5 w-5")} />
             </div>
-            {!isCollapsed && <span className="text-sm">{item.label}</span>}
+            {!isCollapsed && <span>{item.label}</span>}
           </NavLink>
         ))}
       </nav>
