@@ -1,6 +1,6 @@
 {
   "name": "posify",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "main": "./dist/backend/src/index.js",
   "scripts": {
     "build": "tsc",

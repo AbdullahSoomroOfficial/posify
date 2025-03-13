@@ -1,6 +1,5 @@
 {
-  "name": "frontend-by-abdullah",
-  "private": true,
+  "name": "posify",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
