@@ -36,6 +36,7 @@ export function Products() {
       const { success, data, errorMessage } = await api.product.getProducts();
       if (!success) {
         return toast({
+          variant: "destructive",
           title: errorMessage as string,
         });
       }

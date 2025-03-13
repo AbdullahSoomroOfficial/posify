@@ -24,6 +24,7 @@ export function Orders() {
     const { success, data, errorMessage } = await api.order.getOrders();
     if (!success) {
       return toast({
+        variant: "destructive",
         title: errorMessage as string,
       });
     }

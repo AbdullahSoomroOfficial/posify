@@ -1,12 +1,12 @@
 {
   "name": "posify",
   "version": "1.0.0",
-  "main": "./dist/index.js",
+  "main": "./dist/backend/src/index.js",
   "scripts": {
     "build": "tsc",
     "dev": "cross-env NODE_ENV=development nodemon -w src -w docs -e ts --exec 'ts-node ./src/index.ts'",
-    "build:start": "npm run build && cross-env NODE_ENV=production node dist/index.js",
-    "start": "cross-env NODE_ENV=production node dist/index.js"
+    "build:start": "npm run build && cross-env NODE_ENV=production node dist/backend/src/index.js",
+    "start": "cross-env NODE_ENV=production node dist/backend/src/index.js"
   },
   "dependencies": {
     "chalk": "^5.4.1",

@@ -22,9 +22,14 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
 
+    /* shadcn/ui */
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@pages": ["./src/pages/index.ts"],
+      "@api": ["./src/api/index.ts"],
+      "@interfaces": ["../shared/interfaces.ts"],
+      "@dto": ["../shared/dto.ts"]
     }
   },
   "include": ["src"]

@@ -32,6 +32,7 @@ export function Stocks() {
     const { success, data, errorMessage } = await api.stock.getStocks();
     if (!success) {
       return toast({
+        variant: "destructive",
         title: errorMessage as string,
       });
     }
