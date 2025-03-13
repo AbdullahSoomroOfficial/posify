@@ -23,9 +23,7 @@ export function Products() {
   const filteredProducts =
     searchTerm === ""
       ? products
-      : products.filter((product) =>
-          product.name.toLowerCase().includes(searchTerm.toLowerCase())
-        );
+      : products.filter((product) => product.name.includes(searchTerm));
 
   const handleProductCreated = (newProduct: Product) => {
     setProducts((prevProducts) => [...prevProducts, newProduct]);
@@ -48,7 +46,7 @@ export function Products() {
 
   return (
     <>
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between gap-3 flex-wrap">
         <h2 className="text-3xl font-bold">Products</h2>
         <AddProduct onProductCreated={handleProductCreated} />
       </div>

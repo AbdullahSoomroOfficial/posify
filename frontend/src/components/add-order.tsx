@@ -13,6 +13,14 @@ import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 import { api } from "@/api";
 import { CreateOrderDto, Product } from "@interfaces";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 
 export function AddOrder({ getOrders }: { getOrders: () => void }) {
   const { toast } = useToast();
@@ -57,6 +65,7 @@ export function AddOrder({ getOrders }: { getOrders: () => void }) {
 
   // On selection, find product by name and add it as a new order item.
   const handleProductSelect = () => {
+    if (searchQuery === "") return;
     const matched = availableProducts.find(
       (p) => p.name.toLowerCase() === searchQuery.toLowerCase()
     );
@@ -131,7 +140,7 @@ export function AddOrder({ getOrders }: { getOrders: () => void }) {
       <DialogTrigger asChild>
         <Button>Add Order</Button>
       </DialogTrigger>
-      <DialogContent className="min-w-5xl max-h-[calc(100vh-2rem)] overflow-auto">
+      <DialogContent className="max-h-[calc(100vh-2rem)] overflow-auto">
         <DialogHeader>
           <DialogTitle>Add Order</DialogTitle>
         </DialogHeader>
@@ -158,43 +167,55 @@ export function AddOrder({ getOrders }: { getOrders: () => void }) {
           {/* Order items list */}
           <div className="space-y-4">
             {items.length > 0 && (
-              <>
-                <div className="grid grid-cols-[repeat(auto-fill,minmax(170px,1fr))] gap-4 items-center">
-                  <div>Name</div>
-                  <div>Price</div>
-                  <div>Quantity</div>
-                  <div>Line Total</div>
-                  <div>Action</div>
-                </div>
-                {items.map((item, index) => (
-                  <div
-                    key={index}
-                    className="grid grid-cols-[repeat(auto-fill,minmax(170px,1fr))] gap-4 items-center"
-                  >
-                    <div>{item.productName}</div>
-                    <div>${item.price.toFixed(2)}</div>
-                    <Input
-                      type="number"
-                      value={item.quantity}
-                      onChange={(e) => {
-                        const newItems = [...items];
-                        newItems[index].quantity = Number(e.target.value);
-                        setItems(newItems);
-                      }}
-                      required
-                    />
-                    <div>${(item.price * item.quantity).toFixed(2)}</div>
-                    <Button
-                      variant="destructive"
-                      type="button"
-                      onClick={() => removeItem(index)}
-                    >
-                      Remove
-                    </Button>
-                  </div>
-                ))}
-              </>
+              <div className="border rounded-md overflow-hidden">
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>Name</TableHead>
+                      <TableHead>Price</TableHead>
+                      <TableHead>Quantity</TableHead>
+                      <TableHead>Line Total</TableHead>
+                      <TableHead>Action</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {items.map((item, index) => (
+                      <TableRow key={index}>
+                        <TableCell>{item.productName}</TableCell>
+                        <TableCell>{item.price}</TableCell>
+                        <TableCell>
+                          <Input
+                            type="number"
+                            value={item.quantity}
+                            onChange={(e) => {
+                              const newItems = [...items];
+                              newItems[index].quantity = Number(e.target.value);
+                              setItems(newItems);
+                            }}
+                            required
+                          />
+                        </TableCell>
+                        <TableCell>
+                          {(item.price * item.quantity).toFixed(2)}
+                        </TableCell>
+                        <TableCell>
+                          <Button
+                            variant="destructive"
+                            type="button"
+                            onClick={() => removeItem(index)}
+                          >
+                            Remove
+                          </Button>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </div>
             )}
+            <div>
+              <strong>Subtotal:</strong> {subtotal.toFixed(2)}
+            </div>
             {/* Discount input */}
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="discount" className="text-right font-bold">
@@ -209,15 +230,12 @@ export function AddOrder({ getOrders }: { getOrders: () => void }) {
               />
             </div>
             <div>
-              <strong>Subtotal:</strong> ${subtotal.toFixed(2)}
+              <strong>Total Amount:</strong> {totalAmount.toFixed(2)}
             </div>
-            <div>
-              <strong>Total Amount:</strong> ${totalAmount.toFixed(2)}
-            </div>
+            <DialogFooter>
+              <Button type="submit">Save</Button>
+            </DialogFooter>
           </div>
-          <DialogFooter>
-            <Button type="submit">Save Order</Button>
-          </DialogFooter>
         </form>
       </DialogContent>
     </Dialog>

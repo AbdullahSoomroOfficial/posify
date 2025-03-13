@@ -46,7 +46,7 @@ export function OrderById() {
         </CardHeader>
         <CardContent>
           <div className="mb-4">
-            <p>
+            <p className="break-words">
               <strong>Order ID:</strong> {order._id}
             </p>
             <p>
@@ -61,7 +61,7 @@ export function OrderById() {
             <div className="space-y-4">
               {order.items.map((item, index) => (
                 <Card key={index} className="border rounded-md p-4">
-                  <p>
+                  <p className="break-words">
                     <strong>Product ID:</strong> {item.productId}
                   </p>
                   <p>
