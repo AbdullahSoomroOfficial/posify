@@ -1,3 +1,5 @@
+import "./config/load-env-variables";
+import "./db/connect-db";
 import express from "express";
 import { appRouter } from "./app.router";
 import { createResponse } from "./utils/response.util";
@@ -14,7 +16,7 @@ import { errorType } from "../../shared/interfaces";
 import swaggerUi from "swagger-ui-express";
 import { swaggerSpec } from "../docs";
 import { MongoServerError } from "mongodb";
-import path from "path";
+// import path from "path";
 
 const app = express();
 
@@ -27,12 +29,12 @@ app.use("/api", appRouter);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 /* Serve static assets */
-app.use(express.static(path.join(process.cwd(), "../frontend/dist")));
+// app.use(express.static(path.join(process.cwd(), "frontend/dist")));
 
 /* Serve react app */
-app.get("*", (_, res) => {
-  res.sendFile(path.join(process.cwd(), "../frontend/dist", "index.html"));
-});
+// app.get("*", (_, res) => {
+// res.sendFile(path.join(process.cwd(), "frontend/dist", "index.html"));
+// });
 
 /* Custom error handler */
 app.use((error: unknown, _: Request, response: Response, __: NextFunction) => {

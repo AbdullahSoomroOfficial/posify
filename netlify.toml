@@ -1,0 +1,12 @@
+[functions]
+  external_node_modules = ["express"]
+  node_bundler = "esbuild"
+  directory = "./backend/netlify/functions"
+[[redirects]]
+  force = true
+  from = "/api/*"
+  status = 200
+  to = "/.netlify/functions/serverless"
+[build]
+  command = "cd frontend && npm run build"   
+  publish = "frontend/dist"

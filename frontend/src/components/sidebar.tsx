@@ -68,7 +68,9 @@ export function Sidebar() {
             <div className="min-h-5 min-w-5">
               <item.icon className={cn("h-5 w-5")} />
             </div>
-            {!isCollapsed && <span>{item.label}</span>}
+            {!isCollapsed && (
+              <span className="h-5 flex items-center">{item.label}</span>
+            )}
           </NavLink>
         ))}
       </nav>
