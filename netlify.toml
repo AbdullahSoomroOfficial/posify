@@ -8,5 +8,4 @@
   status = 200
   to = "/.netlify/functions/serverless"
 [build]
-  command = "cd frontend && npm run build"   
   publish = "frontend/dist"
