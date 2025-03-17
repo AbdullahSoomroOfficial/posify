@@ -36,7 +36,7 @@ export function Dashboard() {
       <h1 className="text-3xl font-bold">Dashboard</h1>
 
       {/* Sales Summary Cards */}
-      <div className="grid grid-cols-[repeat(auto-fill,minmax(240px,1fr))] gap-6">
+      <div className="grid grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-6">
         <Card>
           <CardHeader>
             <CardTitle>Today's Sales</CardTitle>
