@@ -32,7 +32,6 @@ POSify is a Point of Sale (POS) system that includes a backend API and a fronten
 │   │   ├── App.tsx
 │   │   ├── main.tsx
 │   │   └── index.css
-│   ├── public/ (static assets)
 │   ├── dist/ (Production build output)
 │   ├── index.html
 │   ├── package.json
@@ -42,57 +41,6 @@ POSify is a Point of Sale (POS) system that includes a backend API and a fronten
 │   ├── dto.ts
 │   └── interfaces.ts
 ```
-
-## Backend
-
-- **Framework**: Node.js with Express
-- **Language**: TypeScript
-- **Database**: MongoDB
-- **API Docs**: Swagger (`/backend/docs/`)
-- **Environment Variables**:
-  - `PORT`
-  - `DATABASE_URL`
-  - `NODE_ENV`
-- **Key Folders**:
-  - `analytics/`, `order/`, `product/`, `stock/`: CRUD modules
-  - `db/`: Database connection
-  - `utils/`: Common utilities (error handling, response formatting, validation)
-
-## Frontend
-
-- **Framework**: React + Vite
-- **Language**: TypeScript
-- **Styling**: CSS
-- **Key Features**:
-  - Product Management
-  - Order Management
-  - Stock Tracking
-  - Dashboard Analytics
-- **Key Folders**:
-  - `api/`: Axios API calls
-  - `components/`: UI components
-  - `hooks/`: Custom React hooks
-  - `pages/`: Pages for different routes (Dashboard, Products, Orders, Stocks)
-
-## Scripts
-
-### Backend
-
-| Command | Description |
-| :--- | :--- |
-| `npm install` | Install backend dependencies |
-| `npm run dev` | Start the backend in development mode |
-| `npm run build` | Build the backend TypeScript files |
-| `npm start` | Start the production backend (after build) |
-
-### Frontend
-
-| Command | Description |
-| :--- | :--- |
-| `npm install` | Install frontend dependencies |
-| `npm run dev` | Start the frontend in development mode |
-| `npm run build` | Build the frontend for production |
-| `npm run preview` | Preview the built frontend locally |
 
 ## How to Run Locally
 
