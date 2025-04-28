@@ -38,8 +38,8 @@ POSify is a Point of Sale (POS) system that includes a backend API and a fronten
 │   └── vite.config.ts
 │
 ├── shared
-│   ├── dto.ts
-│   └── interfaces.ts
+    ├── dto.ts
+    └── interfaces.ts
 ```
 
 ## How to Run Locally
