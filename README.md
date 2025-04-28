@@ -1,12 +1,28 @@
 # POSify
 
-POSify is a Point of Sale (POS) system that includes a backend API and a frontend dashboard for managing products, orders, and stock analytics.
+![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
+![React](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black)
+![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
+
+POSify is a modern Point of Sale (POS) system featuring a RESTful backend API and a sleek frontend dashboard for managing products, orders, and stock analytics.
+
+---
+
+## Table of Contents
+
+- [Project Structure](#project-structure)
+- [How to Run Locally](#how-to-run-locally)
+- [API Documentation](#api-documentation)
+- [Tech Stack](#tech-stack)
+
+---
 
 ## Project Structure
 
 ```
 ├── backend
-│   ├── src
+│   ├── src/
 │   │   ├── analytics/
 │   │   ├── order/
 │   │   ├── product/
@@ -24,7 +40,7 @@ POSify is a Point of Sale (POS) system that includes a backend API and a fronten
 │   └── tsconfig.json
 │
 ├── frontend
-│   ├── src
+│   ├── src/
 │   │   ├── api/
 │   │   ├── components/
 │   │   ├── hooks/
@@ -38,66 +54,76 @@ POSify is a Point of Sale (POS) system that includes a backend API and a fronten
 │   └── vite.config.ts
 │
 ├── shared
-    ├── dto.ts
-    └── interfaces.ts
+│   ├── dto.ts
+│   └── interfaces.ts
 ```
+
+---
 
 ## How to Run Locally
 
-### Backend
+### Prerequisites
 
-1. Navigate to the backend folder:
-   ```bash
-   cd backend
-   ```
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-3. Create a `.env.development` file (already included) and configure your environment variables.
-4. Run the development server:
-   ```bash
-   npm run dev
-   ```
+- [Node.js](https://nodejs.org/) (v18+ recommended)
+- [MongoDB](https://www.mongodb.com/) instance running locally or remotely
 
-### Frontend
+### Backend Setup
 
-1. Navigate to the frontend folder:
-   ```bash
-   cd frontend
-   ```
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-3. Run the development server:
-   ```bash
-   npm run dev
-   ```
-4. Access the frontend app at `http://localhost:5173/` (default Vite port).
+```bash
+# Navigate to backend
+cd backend
+
+# Install dependencies
+npm install
+
+# Start the server
+npm run dev
+```
+
+Backend should be running at: [http://localhost:3000](http://localhost:3000)
+
+### Frontend Setup
+
+```bash
+# Navigate to frontend
+cd frontend
+
+# Install dependencies
+npm install
+
+# Start the development server
+npm run dev
+```
+
+Frontend should be running at: [http://localhost:5173](http://localhost:5173)
+
+---
 
 ## API Documentation
 
-After starting the backend server, Swagger API docs are available at:
+Once the backend is running, Swagger docs are available at:
 
-```
-http://localhost:3000/api/docs
-```
+[http://localhost:3000/api/docs](http://localhost:3000/api/docs)
 
-It documents the available routes for:
-- Products
-- Orders
-- Stocks
-- Analytics
+Available endpoints:
+- Products CRUD
+- Orders Management
+- Stock Updates
+- Analytics and Reports
+
+---
 
 ## Tech Stack
 
+**Backend**
 - Node.js
-- Express
-- MongoDB
-- Mongoose
+- Express.js
+- MongoDB + Mongoose
+- TypeScript
+- Swagger (OpenAPI 3.0)
+
+**Frontend**
 - React
 - Vite
 - TypeScript
 - Tailwind CSS (or custom CSS)
-- Swagger (OpenAPI 3.0)
