@@ -130,3 +130,4 @@ Available endpoints:
 - Vite
 - TypeScript
 - Tailwind CSS (or custom CSS)
+- Shadcn (UI library)
