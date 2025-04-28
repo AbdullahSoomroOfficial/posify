@@ -7,6 +7,9 @@
 
 POSify is a modern Point of Sale (POS) system featuring a RESTful backend API and a sleek frontend dashboard for managing products, orders, and stock analytics.
 
+> **Note:** This is a **practice project** built to sharpen fullstack development skills.  
+> The backend architecture is **inspired by NestJS** (modular and organized), but it is **custom built** using **Express.js** without using the NestJS framework directly.
+
 ---
 
 ## Table of Contents
