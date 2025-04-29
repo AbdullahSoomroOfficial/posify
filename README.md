@@ -12,10 +12,28 @@ POSify is a modern Point of Sale (POS) system featuring a RESTful backend API an
 
 ## Table of Contents
 
+- [Tech Stack](#tech-stack)
 - [Project Structure](#project-structure)
 - [How to Run Locally](#how-to-run-locally)
 - [API Documentation](#api-documentation)
-- [Tech Stack](#tech-stack)
+
+---
+
+## Tech Stack
+
+**Backend**
+- Node.js
+- Express.js
+- MongoDB + Mongoose
+- TypeScript
+- Swagger (OpenAPI 3.0)
+
+**Frontend**
+- React
+- Vite
+- TypeScript
+- Tailwind CSS (or custom CSS)
+- Shadcn (UI library)
 
 ---
 
@@ -111,21 +129,3 @@ Available endpoints:
 - Orders Management
 - Stock Updates
 - Analytics and Reports
-
----
-
-## Tech Stack
-
-**Backend**
-- Node.js
-- Express.js
-- MongoDB + Mongoose
-- TypeScript
-- Swagger (OpenAPI 3.0)
-
-**Frontend**
-- React
-- Vite
-- TypeScript
-- Tailwind CSS (or custom CSS)
-- Shadcn (UI library)
